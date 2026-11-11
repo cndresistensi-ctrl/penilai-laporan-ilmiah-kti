@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penilai Laporan Ilmiah & KTI</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111d2e;
+      --panel: #16263f;
+      --line: #2a3d59;
+      --text: #edf3ff;
+      --muted: #9fb3d1;
+      --accent: #5aa9ff;
+      --accent-2: #8f6bff;
+      --success: #4ad184;
+      --warning: #f2b955;
+      --danger: #f17070;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #07111d 0%, #0f1d2f 100%);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 28px 18px 50px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 2vw, 2.6rem);
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 0.84rem;
+    }
+
+    .card {
+      background: rgba(17, 29, 46, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--muted);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      font: inherit;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 72px;
+    }
+
+    .criterion {
+      display: grid;
+      grid-template-columns: minmax(200px, 1.2fr) minmax(180px, 1.2fr) minmax(120px, 1fr);
+      gap: 16px;
+      align-items: start;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .criterion:last-child { border-bottom: 0; }
+
+    .criterion-title {
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .criterion-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .weight {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--accent);
+      font-size: 0.8rem;
+      background: rgba(90,169,255,0.08);
+      border: 1px solid rgba(90,169,255,0.25);
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 12px 18px;
+      transition: transform 0.15s ease, opacity 0.2s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .result {
+      display: none;
+      border-left: 4px solid var(--accent);
+      background: rgba(90,169,255,0.04);
+    }
+
+    .score {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .grade {
+      font-weight: 800;
+      color: var(--success);
+      margin-top: 10px;
+      font-size: 1.05rem;
+    }
+
+    .summary {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .error {
+      margin-top: 12px;
+      color: #ffb3b3;
+      min-height: 20px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 720px) {
+      .criterion {
+        grid-template-columns: 1fr;
+      }
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media print {
+      body { background: white; color: #111; }
+      .card { box-shadow: none; background: white; color: #111; border-color: #d9e2f1; }
+      .tag, .secondary, .primary, .actions { display: none !important; }
+      .result { display: block !important; }
+      .summary, .criterion-desc, label { color: #333; }
+      input, select, textarea { color: #111; background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <h1>Penilai Laporan Ilmiah & KTI</h1>
+      <div class="tag">Gratis • Browser-based</div>
+    </div>
+
+    <section class="card">
+      <div class="grid">
+        <div>
+          <label for="workType">Jenis Karya</label>
+          <select id="workType">
+            <option value="laporan">Laporan Ilmiah</option>
+            <option value="kti">Karya Tulis Ilmiah</option>
+          </select>
+        </div>
+        <div>
+          <label for="title">Judul</label>
+          <input id="title" type="text" placeholder="Masukkan judul karya">
+        </div>
+        <div>
+          <label for="author">Penulis</label>
+          <input id="author" type="text" placeholder="Nama penulis">
+        </div>
+        <div>
+          <label for="reviewer">Penilai</label>
+          <input id="reviewer" type="text" placeholder="Nama penilai">
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 style="margin-top:0;">Rubrik Penilaian</h2>
+      <div id="rubric"></div>
+      <div class="actions">
+        <button id="calculate" class="primary">Hitung Nilai</button>
+        <button id="print" class="secondary" type="button">Cetak / PDF</button>
+        <button id="reset" class="secondary" type="button">Reset</button>
+      </div>
+      <div id="error" class="error" aria-live="polite"></div>
+    </section>
+
+    <section id="result" class="card result">
+      <h2 style="margin-top:0;">Hasil Penilaian</h2>
+      <div id="finalScore" class="score">0 / 100</div>
+      <div id="gradeText" class="grade">Predikat: -</div>
+      <p id="summaryText" class="summary"></p>
+    </section>
+  </div>
+
+  <script>
+    const criteria = [
+      { name: 'Orisinalitas dan Relevansi', weight: 20, desc: 'Kebaruan, keaslian gagasan, dan kesesuaian topik dengan tujuan karya.' },
+      { name: 'Sistematika dan Struktur', weight: 20, desc: 'Kelengkapan bagian karya, alur penulisan, serta keteraturan penyusunan.' },
+      { name: 'Metode dan Ketepatan Ilmiah', weight: 25, desc: 'Kesesuaian metode, kejelasan prosedur, dan ketepatan penggunaan konsep.' },
+      { name: 'Data, Analisis, dan Pembahasan', weight: 20, desc: 'Kualitas data, kecermatan analisis, dan hubungan hasil dengan tujuan.' },
+      { name: 'Bahasa dan Referensi', weight: 15, desc: 'Kejelasan bahasa, gaya penulisan, dan kualitas sitasi serta daftar pustaka.' }
+    ];
+
+    const rubric = document.getElementById('rubric');
+
+    function renderRubric() {
+      rubric.innerHTML = criteria.map((item, index) => `
+        <div class="criterion">
+          <div>
+            <div class="criterion-title">${item.name}</div>
+            <div class="criterion-desc">${item.desc}</div>
+            <span class="weight">Bobot: ${item.weight}%</span>
+          </div>
+          <div>
+            <label for="score-${index}">Skor (1-4)</label>
+            <select id="score-${index}" class="score-input">
+              <option value="">Pilih skor</option>
+              <option value="1">1 - Kurang</option>
+              <option value="2">2 - Cukup</option>
+              <option value="3">3 - Baik</option>
+              <option value="4">4 - Sangat Baik</option>
+            </select>
+          </div>
+          <div>
+            <label for="note-${index}">Catatan</label>
+            <textarea id="note-${index}" placeholder="Tuliskan catatan penilai"></textarea>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getGrade(score) {
+      if (score >= 86) return ['A', 'Sangat Baik'];
+      if (score >= 76) return ['B', 'Baik'];
+      if (score >= 66) return ['C', 'Cukup'];
+      return ['D', 'Perlu Perbaikan'];
+    }
+
+    document.getElementById('calculate').addEventListener('click', () => {
+      const scoreInputs = [...document.querySelectorAll('.score-input')];
+      const errorBox = document.getElementById('error');
+      const resultBox = document.getElementById('result');
+
+      errorBox.textContent = '';
+
+      if (scoreInputs.some((input) => input.value === '')) {
+        errorBox.textContent = 'Harap pilih skor untuk semua aspek sebelum menghitung.';
+        return;
+      }
+
+      let total = 0;
+      scoreInputs.forEach((input, idx) => {
+        const score = Number(input.value);
+        const weight = criteria[idx].weight;
+        total += (score / 4) * weight;
+      });
+
+      const rounded = Math.round(total * 100) / 100;
+      const [letter, desc] = getGrade(rounded);
+      const workType = document.getElementById('workType').value === 'kti' ? 'Karya Tulis Ilmiah (KTI)' : 'Laporan Ilmiah';
+      const title = document.getElementById('title').value || 'Tanpa judul';
+      const author = document.getElementById('author').value || 'Nama penulis belum diisi';
+      const reviewer = document.getElementById('reviewer').value || 'Nama penilai belum diisi';
+
+      document.getElementById('finalScore').textContent = `${rounded} / 100`;
+      document.getElementById('gradeText').textContent = `Predikat: ${letter} - ${desc}`;
+      document.getElementById('summaryText').textContent = `${workType} "${title}" oleh ${author}. Penilai: ${reviewer}.`;
+      resultBox.style.display = 'block';
+    });
+
+    document.getElementById('reset').addEventListener('click', () => {
+      document.querySelectorAll('input, select, textarea').forEach((el) => {
+        if (el.tagName !== 'SELECT' || el.id !== 'workType') {
+          el.value = '';
+        }
+      });
+      document.getElementById('workType').value = 'laporan';
+      document.getElementById('result').style.display = 'none';
+      document.getElementById('error').textContent = '';
+    });
+
+    document.getElementById('print').addEventListener('click', () => {
+      window.print();
+    });
+
+    renderRubric();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
