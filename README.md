@@ -1,30 +1,37 @@
-# Ruang Nilai — Penilaian Laporan Ilmiah & KTI
+# Ruang Nilai — versi full-stack untuk Vercel
 
-Aplikasi gratis untuk menilai laporan ilmiah dan Karya Tulis Ilmiah dengan rubrik berbobot, dokumentasi masukan, dan rekap penilaian lokal.
+Aplikasi full-stack Next.js untuk penilaian laporan ilmiah dan KTI. Autentikasi dan penyimpanan data memakai Supabase; Vercel menjalankan aplikasi Next.js.
 
-## Fitur
-- Form identitas karya, penulis, penilai, institusi, dan tanggal.
-- Rubrik 5 aspek dengan bobot total 100% dan skor 1–4.
-- Perhitungan nilai, predikat, serta rekomendasi tindak lanjut otomatis.
-- Draft formulir tersimpan otomatis di browser.
-- Riwayat dan ringkasan penilaian tersimpan menggunakan `localStorage`.
-- Ekspor penilaian dan rekap riwayat ke CSV.
-- Cetak laporan atau simpan sebagai PDF melalui dialog cetak browser.
-- Desain responsif untuk desktop dan ponsel.
+## Yang tersedia
+- Daftar dan masuk dengan email/kata sandi melalui Supabase Auth.
+- CRUD penilaian persisten lintas perangkat.
+- Row Level Security (RLS): setiap akun hanya dapat membaca dan mengubah penilaiannya sendiri.
+- Rubrik 5 aspek berbobot 100%, skor, catatan, predikat, serta rekomendasi.
+- Dashboard ringkas, ekspor CSV, dan cetak/simpan PDF.
 
-## Menjalankan
-Buka `index.html` di browser. Tidak ada instalasi atau build yang diperlukan.
+## 1. Siapkan database Supabase
+1. Buat project di https://supabase.com.
+2. Buka **SQL Editor**, lalu jalankan isi `supabase/schema.sql`.
+3. Dari **Project Settings → API**, salin Project URL dan `anon` / publishable key.
+4. Authentication → Providers → Email: aktifkan provider email. Untuk produksi, atur konfirmasi email dan SMTP sesuai kebutuhan.
 
-## Deploy ke Netlify
-Repository ini adalah situs statis. Hubungkan repo GitHub ini ke Netlify dan gunakan:
-- Build command: kosong
-- Publish directory: `.`
+## 2. Hubungkan ke Vercel
+1. Import repository GitHub ini ke Vercel sebagai project Next.js.
+2. Tambahkan Environment Variables untuk Production (serta Preview jika perlu):
+   - `NEXT_PUBLIC_SUPABASE_URL` = Project URL Supabase
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = anon/publishable key Supabase
+3. Redeploy project. Build command standar `npm run build`; output biarkan otomatis ditangani Vercel.
+4. Buka domain Vercel dan buat akun penilai.
 
-Konfigurasi sudah tersedia di `netlify.toml`.
+**Jangan pernah menaruh `service_role` key di kode browser atau variabel `NEXT_PUBLIC_*`.** Aplikasi hanya memakai anon/publishable key dan kebijakan RLS.
 
-## Catatan privasi dan batasan
-- Semua data penilaian disimpan di penyimpanan lokal browser/perangkat yang digunakan. Data tidak dikirim ke server, tidak tersedia lintas perangkat, dan dapat hilang jika data browser dihapus.
-- Gunakan tombol ekspor CSV untuk mencadangkan atau memindahkan rekap.
-- Aplikasi ini belum menyediakan akun, sinkronisasi cloud, kolaborasi penilai, atau basis data terpusat.
-- Bobot, batas predikat, dan rekomendasi adalah contoh awal. Lembaga sebaiknya menyesuaikannya dengan pedoman resmi dan menguji konsistensi rubrik sebelum digunakan untuk keputusan formal.
-- Penilaian ini mendukung evaluasi manusia; skor dan rekomendasi bukan pengganti telaah akademik.
+## Pengembangan lokal
+```bash
+npm install
+cp .env.example .env.local
+npm run dev
+```
+Isi `.env.local` dengan URL dan anon key Supabase project Anda.
+
+## Data dan rubrik
+Data disimpan dalam tabel `public.assessments` di project Supabase Anda. Perubahan bobot, batas predikat, serta rekomendasi pada contoh ini perlu disahkan dan disesuaikan dengan pedoman lembaga sebelum digunakan untuk keputusan resmi. Aplikasi belum mempunyai organisasi/tenant, undangan penilai, atau peran admin.
