@@ -1,540 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Penilai Laporan Ilmiah & KTI</title>
-    <style>
-      :root {
-        --bg: #081827;
-        --bg-2: #0d1f31;
-        --panel: rgba(19, 31, 46, 0.92);
-        --panel-2: rgba(24, 38, 55, 0.9);
-        --line: rgba(148, 164, 188, 0.18);
-        --text: #eff7ff;
-        --muted: #a6bbd3;
-        --primary: #4da3ff;
-        --primary-2: #7d6dff;
-        --success: #45d38b;
-        --warning: #ffbb55;
-        --danger: #ff7171;
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10243d">
+  <title>Ruang Nilai — Penilaian Karya Ilmiah</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#14243a;background:#f3f6fb;font-synthesis:none;--navy:#10243d;--blue:#245fce;--line:#dce4ef;--muted:#63738b;--green:#16845b;--amber:#a86108;--red:#b33b45}
+    *{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button{cursor:pointer}.shell{max-width:1180px;margin:auto;padding:28px 20px 60px}.masthead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#2c77ec,#7358d9);display:grid;place-items:center;color:#fff;font-size:23px;font-weight:900}.brand h1{font-size:1.35rem;margin:0;color:var(--navy)}.brand p{margin:3px 0 0;color:var(--muted);font-size:.9rem}.privacy{padding:9px 13px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#40536d;font-size:.82rem}.hero{background:linear-gradient(120deg,#10243d,#1d4571);border-radius:22px;padding:27px 30px;color:white;margin-bottom:18px}.hero h2{margin:0 0 7px;font-size:1.55rem}.hero p{margin:0;color:#d4e4f8;line-height:1.55;max-width:720px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.stat,.card{background:#fff;border:1px solid var(--line);border-radius:17px;box-shadow:0 5px 20px #17365b08}.stat{padding:17px 19px}.stat-label{font-size:.82rem;color:var(--muted)}.stat-value{font-size:1.55rem;font-weight:800;color:var(--navy);margin-top:5px}.card{padding:23px;margin-bottom:18px}.section-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:0 0 17px}.section-title h2{font-size:1.12rem;margin:0;color:var(--navy)}.section-title p{margin:5px 0 0;color:var(--muted);font-size:.9rem}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.field label,.criterion label{display:block;font-weight:700;font-size:.86rem;color:#354963;margin-bottom:7px}.field input,.field select,.criterion select,.criterion textarea,.field textarea{width:100%;border:1px solid #cbd6e5;border-radius:10px;padding:11px 12px;color:#17283f;background:#fff;outline:none}.field input:focus,.field select:focus,.criterion select:focus,.criterion textarea:focus,.field textarea:focus{border-color:#4b83dc;box-shadow:0 0 0 3px #4b83dc20}.field small{color:var(--muted)}.rubric-head{display:grid;grid-template-columns:1fr 150px 230px;gap:14px;padding:0 0 9px;border-bottom:1px solid var(--line);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:800}.criterion{display:grid;grid-template-columns:1fr 150px 230px;gap:14px;align-items:start;padding:17px 0;border-bottom:1px solid #edf1f6}.criterion:last-child{border-bottom:0}.criterion h3{margin:0 0 5px;font-size:.96rem;color:#203650}.criterion p{margin:0;color:var(--muted);font-size:.87rem;line-height:1.5}.weight{display:inline-block;margin-top:8px;font-size:.76rem;color:#245fce;background:#edf4ff;padding:4px 8px;border-radius:999px}.criterion textarea{min-height:68px;resize:vertical}.score-hint{margin:14px 0 0;color:var(--muted);font-size:.85rem}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.btn{border:1px solid transparent;border-radius:10px;padding:10px 15px;font-weight:750}.btn-primary{background:var(--blue);color:#fff}.btn-secondary{border-color:#cdd8e6;background:#fff;color:#273d5a}.btn-danger{border-color:#f0c5c6;background:#fff7f7;color:#9b3038}.btn-small{padding:7px 10px;font-size:.8rem;border-radius:8px}.message{min-height:22px;margin-top:12px;font-size:.9rem;font-weight:650;color:var(--red)}.message.ok{color:var(--green)}.result{display:none;border-top:4px solid var(--blue)}.result-top{display:flex;justify-content:space-between;align-items:flex-start;gap:15px}.result h2{margin:0 0 8px;color:var(--navy)}.result-score{font-size:2.2rem;font-weight:900;color:var(--navy)}.pill{display:inline-block;border-radius:999px;padding:6px 10px;font-size:.83rem;font-weight:800;background:#eef4ff;color:#245fce}.result-meta{color:var(--muted);line-height:1.6}.recommendation{padding:12px 14px;margin-top:13px;border-radius:10px;background:#f1f7ff;color:#25496f;line-height:1.5}.notes-list{margin-top:14px}.notes-list h3{font-size:.92rem;color:var(--navy)}.notes-list ul{padding-left:20px;color:#4a5d75;line-height:1.6}.history-table-wrap{overflow-x:auto}.history-table{width:100%;border-collapse:collapse;min-width:680px}.history-table th,.history-table td{text-align:left;padding:11px 10px;border-bottom:1px solid #e8edf4;vertical-align:middle}.history-table th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}.history-table td{font-size:.88rem}.empty{text-align:center;padding:25px;color:var(--muted)}.history-actions{display:flex;gap:6px}.footer{text-align:center;color:var(--muted);font-size:.82rem;margin-top:23px}.hidden{display:none!important}
+    @media(max-width:760px){.shell{padding:18px 13px 40px}.hero{padding:22px}.stats{gap:8px}.stat{padding:13px}.stat-value{font-size:1.25rem}.rubric-head{display:none}.criterion{grid-template-columns:1fr 1fr}.criterion .criterion-main{grid-column:1/-1}.criterion .note-field{grid-column:1/-1}.section-title{flex-direction:column}.card{padding:18px}}
+    @media(max-width:480px){.stats{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.privacy{font-size:.74rem}.result-top{flex-direction:column}}
+    @media print{body{background:#fff;color:#111}.shell{max-width:none;padding:0}.masthead,.hero,.stats,.form-card,.rubric-card,.history-card,.footer,.actions,.privacy{display:none!important}.card{border:0;box-shadow:none;padding:0}.result{display:block!important;border:0}.result h2{font-size:20pt}.result-score{font-size:28pt}.result-meta,.recommendation,.notes-list{color:#222}.print-header{display:block!important}.print-header p{margin:3px 0;color:#333}.result-top{border-bottom:1px solid #bbb;padding-bottom:12px}.recommendation{border:1px solid #ddd;background:#fff}.notes-list li{break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <div class="brand"><div class="logo" aria-hidden="true">R</div><div><h1>Ruang Nilai</h1><p>Sistem penilaian laporan ilmiah &amp; KTI</p></div></div>
+      <div class="privacy">🔒 Data disimpan hanya di perangkat ini</div>
+    </header>
 
-      * { box-sizing: border-box; }
+    <section class="hero"><h2>Penilaian yang terstruktur dan transparan</h2><p>Gunakan rubrik berbobot untuk menilai karya, dokumentasikan masukan, dan simpan rekap lokal untuk kebutuhan evaluasi. Hasil dapat dicetak atau diekspor sebagai CSV.</p></section>
 
-      html { scroll-behavior: smooth; }
+    <section class="stats" aria-label="Ringkasan penilaian">
+      <div class="stat"><div class="stat-label">Penilaian tersimpan</div><div id="statCount" class="stat-value">0</div></div>
+      <div class="stat"><div class="stat-label">Rata-rata nilai</div><div id="statAverage" class="stat-value">—</div></div>
+      <div class="stat"><div class="stat-label">Nilai tertinggi</div><div id="statHighest" class="stat-value">—</div></div>
+    </section>
 
-      body {
-        margin: 0;
-        font-family: Inter, "Segoe UI", Arial, sans-serif;
-        background: linear-gradient(135deg, var(--bg), var(--bg-2));
-        color: var(--text);
-      }
-
-      .container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 28px 18px 64px;
-      }
-
-      .topbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 18px;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(2rem, 3vw, 2.8rem);
-        letter-spacing: -0.03em;
-      }
-
-      .badge {
-        border: 1px solid var(--line);
-        background: rgba(255,255,255,0.03);
-        color: var(--muted);
-        border-radius: 999px;
-        padding: 8px 14px;
-        font-size: 0.82rem;
-        white-space: nowrap;
-      }
-
-      .card {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        padding: 22px;
-        box-shadow: 0 18px 40px rgba(0,0,0,0.14);
-        margin-bottom: 18px;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 18px;
-      }
-
-      label {
-        display: block;
-        margin-bottom: 8px;
-        color: var(--muted);
-        font-size: 0.92rem;
-        font-weight: 700;
-      }
-
-      input, select, textarea {
-        width: 100%;
-        background: rgba(255,255,255,0.03);
-        color: var(--text);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 12px 14px;
-        font: inherit;
-      }
-
-      textarea {
-        resize: vertical;
-        min-height: 82px;
-      }
-
-      .rubric-header {
-        margin: 0 0 10px;
-        font-size: 1.2rem;
-      }
-
-      .criterion {
-        display: grid;
-        grid-template-columns: minmax(200px, 1.3fr) minmax(180px, 1.2fr) minmax(120px, 1fr);
-        gap: 18px;
-        align-items: start;
-        padding: 16px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
-      }
-
-      .criterion:last-child { border-bottom: none; }
-
-      .criterion-title {
-        font-weight: 800;
-        margin-bottom: 8px;
-      }
-
-      .criterion-desc {
-        color: var(--muted);
-        line-height: 1.6;
-        font-size: 0.93rem;
-      }
-
-      .weight {
-        display: inline-block;
-        margin-top: 10px;
-        background: rgba(77, 163, 255, 0.09);
-        border: 1px solid rgba(77, 163, 255, 0.2);
-        color: #b7d9ff;
-        font-size: 0.8rem;
-        border-radius: 999px;
-        padding: 5px 9px;
-      }
-
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 18px;
-      }
-
-      button {
-        border: 0;
-        border-radius: 12px;
-        padding: 12px 18px;
-        font: inherit;
-        font-weight: 800;
-        cursor: pointer;
-        transition: transform 0.15s ease, opacity 0.2s ease;
-      }
-
-      button:hover { transform: translateY(-1px); }
-
-      .primary {
-        background: linear-gradient(135deg, var(--primary), var(--primary-2));
-        color: white;
-      }
-
-      .secondary {
-        background: rgba(255,255,255,0.04);
-        border: 1px solid var(--line);
-        color: var(--text);
-      }
-
-      .result-box {
-        display: none;
-        background: rgba(77,163,255,0.05);
-        border-left: 4px solid var(--primary);
-      }
-
-      .score {
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 900;
-        letter-spacing: -0.04em;
-      }
-
-      .grade {
-        margin-top: 10px;
-        font-weight: 800;
-        color: var(--success);
-      }
-
-      .summary {
-        margin-top: 10px;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      .error {
-        min-height: 24px;
-        color: #ffc1c1;
-        margin-top: 12px;
-        font-weight: 700;
-      }
-
-      .footer-note {
-        margin-top: 16px;
-        color: var(--muted);
-        font-size: 0.9rem;
-        text-align: center;
-      }
-
-      @media (max-width: 720px) {
-        .criterion {
-          grid-template-columns: 1fr;
-        }
-
-        .topbar {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-      }
-
-      @media print {
-        body { background: white; color: #111; }
-        .card { background: white; box-shadow: none; border-color: #dfeaf6; }
-        .badge, .actions, .secondary, .primary { display: none !important; }
-        .result-box { display: block !important; }
-        label, .criterion-desc, .summary, .muted { color: #222; }
-        input, select, textarea {
-          color: #111;
-          background: white;
-          border-color: #dfeaf6;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="topbar">
-        <h1>Penilai Laporan Ilmiah & KTI</h1>
-        <div class="badge">Gratis • Browser-based</div>
+    <section class="card form-card">
+      <div class="section-title"><div><h2>Identitas penilaian</h2><p>Lengkapi informasi karya dan penilai.</p></div><span class="pill">Draft tersimpan otomatis</span></div>
+      <div class="form-grid">
+        <div class="field"><label for="workType">Jenis karya</label><select id="workType"><option value="Laporan Ilmiah">Laporan Ilmiah</option><option value="Karya Tulis Ilmiah (KTI)">Karya Tulis Ilmiah (KTI)</option><option value="Lainnya">Lainnya</option></select></div>
+        <div class="field"><label for="title">Judul karya <span aria-hidden="true">*</span></label><input id="title" maxlength="180" placeholder="Contoh: Pengaruh ..."></div>
+        <div class="field"><label for="author">Nama penulis</label><input id="author" maxlength="120" placeholder="Nama penulis atau tim"></div>
+        <div class="field"><label for="reviewer">Nama penilai</label><input id="reviewer" maxlength="120" placeholder="Nama guru, dosen, atau juri"></div>
+        <div class="field"><label for="institution">Sekolah / institusi</label><input id="institution" maxlength="140" placeholder="Opsional"></div>
+        <div class="field"><label for="assessmentDate">Tanggal penilaian</label><input id="assessmentDate" type="date"></div>
+        <div class="field" style="grid-column:1/-1"><label for="overallNote">Catatan umum / rekomendasi perbaikan</label><textarea id="overallNote" rows="3" maxlength="1200" placeholder="Tuliskan masukan utama untuk penulis"></textarea></div>
       </div>
+    </section>
 
-      <section class="card">
-        <div class="grid">
-          <div>
-            <label for="workType">Jenis Karya</label>
-            <select id="workType">
-              <option value="laporan">Laporan Ilmiah</option>
-              <option value="kti">Karya Tulis Ilmiah</option>
-            </select>
-          </div>
-          <div>
-            <label for="title">Judul</label>
-            <input id="title" type="text" placeholder="Masukkan judul karya" />
-          </div>
-          <div>
-            <label for="author">Penulis</label>
-            <input id="author" type="text" placeholder="Nama penulis" />
-          </div>
-          <div>
-            <label for="reviewer">Penilai</label>
-            <input id="reviewer" type="text" placeholder="Nama penilai" />
-          </div>
-        </div>
-      </section>
+    <section class="card rubric-card">
+      <div class="section-title"><div><h2>Rubrik penilaian</h2><p>Pilih skor 1–4 pada setiap aspek. Nilai akhir dihitung dari bobot tiap aspek.</p></div><span class="pill">Total bobot: 100%</span></div>
+      <div class="rubric-head"><span>Aspek dan indikator</span><span>Skor</span><span>Catatan penilai</span></div>
+      <div id="rubric"></div>
+      <p class="score-hint">Panduan skor: 1 = Perlu banyak perbaikan · 2 = Berkembang · 3 = Baik · 4 = Sangat baik. Sesuaikan rubrik dengan pedoman lembaga Anda.</p>
+      <div class="actions"><button class="btn btn-primary" id="saveAssessment">Hitung &amp; simpan penilaian</button><button class="btn btn-secondary" id="exportCurrent">Ekspor penilaian CSV</button><button class="btn btn-secondary" id="printReport">Cetak / simpan PDF</button><button class="btn btn-secondary" id="newAssessment">Penilaian baru</button></div>
+      <div id="message" class="message" role="status" aria-live="polite"></div>
+    </section>
 
-      <section class="card">
-        <h2 class="rubric-header">Rubrik Penilaian</h2>
-        <div id="rubric"></div>
+    <section id="result" class="card result" aria-live="polite">
+      <div class="print-header hidden"><h1>Hasil Penilaian Karya Ilmiah</h1><p>Ruang Nilai — Laporan penilaian</p></div>
+      <div class="result-top"><div><h2>Ringkasan hasil</h2><div id="resultMeta" class="result-meta"></div></div><div><div id="resultScore" class="result-score">—</div><span id="resultGrade" class="pill"></span></div></div>
+      <div id="recommendation" class="recommendation"></div>
+      <div id="aspectResults" class="notes-list"></div>
+    </section>
 
-        <div class="actions">
-          <button id="calculate" class="primary">Hitung Nilai</button>
-          <button id="exportCsv" class="secondary" type="button">Export CSV</button>
-          <button id="print" class="secondary" type="button">Cetak / PDF</button>
-          <button id="reset" class="secondary" type="button">Reset</button>
-        </div>
+    <section class="card history-card">
+      <div class="section-title"><div><h2>Riwayat penilaian</h2><p>Rekap tersimpan lokal di browser ini. Data tidak tersinkron ke perangkat lain.</p></div><div class="actions" style="margin:0"><button class="btn btn-secondary btn-small" id="exportHistory">Ekspor semua CSV</button><button class="btn btn-danger btn-small" id="clearHistory">Hapus semua riwayat</button></div></div>
+      <div id="history"></div>
+    </section>
+    <footer class="footer">Ruang Nilai · Aplikasi statis, tanpa akun dan tanpa server. Buat salinan CSV secara berkala untuk mencadangkan data.</footer>
+  </main>
+<script>
+(() => {
+  'use strict';
+  const STORAGE_KEY = 'ruang-nilai-assessments-v1';
+  const DRAFT_KEY = 'ruang-nilai-draft-v1';
+  const criteria = [
+    {name:'Orisinalitas dan relevansi',weight:20,desc:'Kebaruan dan keaslian gagasan serta kesesuaian topik dengan tujuan karya.'},
+    {name:'Sistematika dan struktur',weight:20,desc:'Kelengkapan bagian, keteraturan susunan, dan alur penyajian karya.'},
+    {name:'Metode dan ketepatan ilmiah',weight:25,desc:'Kesesuaian metode, kejelasan prosedur, serta ketepatan penggunaan konsep.'},
+    {name:'Data, analisis, dan pembahasan',weight:20,desc:'Kualitas data, kecermatan analisis, dan keterkaitan pembahasan dengan tujuan.'},
+    {name:'Bahasa dan referensi',weight:15,desc:'Kejelasan bahasa, konsistensi sitasi, serta mutu dan relevansi referensi.'}
+  ];
+  const $ = (id) => document.getElementById(id);
+  let assessments = readAssessments();
+  let activeAssessment = null;
 
-        <div id="error" class="error" aria-live="polite"></div>
-      </section>
+  function readAssessments(){try{const value=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');return Array.isArray(value)?value:[]}catch{return []}}
+  function saveAssessments(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(assessments));return true}catch{return false}}
+  function readDraft(){try{return JSON.parse(localStorage.getItem(DRAFT_KEY)||'null')}catch{return null}}
+  function persistDraft(){const draft={workType:$('workType').value,title:$('title').value,author:$('author').value,reviewer:$('reviewer').value,institution:$('institution').value,assessmentDate:$('assessmentDate').value,overallNote:$('overallNote').value,scores:criteria.map((_,i)=>document.getElementById(`score-${i}`).value),notes:criteria.map((_,i)=>document.getElementById(`note-${i}`).value)};try{localStorage.setItem(DRAFT_KEY,JSON.stringify(draft))}catch{showMessage('Penyimpanan browser penuh. Ekspor data penting sebagai CSV.',false)}}
+  function restoreDraft(){const d=readDraft();if(!d)return;['workType','title','author','reviewer','institution','assessmentDate','overallNote'].forEach(id=>{if(d[id]!==undefined)$(id).value=d[id]});criteria.forEach((_,i)=>{if(d.scores?.[i])document.getElementById(`score-${i}`).value=d.scores[i];if(d.notes?.[i])document.getElementById(`note-${i}`).value=d.notes[i]})}
+  function renderRubric(){ $('rubric').innerHTML=criteria.map((item,i)=>`<div class="criterion"><div class="criterion-main"><h3>${item.name}</h3><p>${item.desc}</p><span class="weight">Bobot ${item.weight}%</span></div><div><label for="score-${i}">Skor (1–4)</label><select id="score-${i}" class="score-input"><option value="">Pilih skor</option><option value="1">1 — Perlu banyak perbaikan</option><option value="2">2 — Berkembang</option><option value="3">3 — Baik</option><option value="4">4 — Sangat baik</option></select></div><div class="note-field"><label for="note-${i}">Catatan penilai</label><textarea id="note-${i}" placeholder="Masukan spesifik untuk aspek ini" maxlength="600"></textarea></div></div>`).join('') }
+  function showMessage(text,ok=false){$('message').textContent=text;$('message').classList.toggle('ok',ok)}
+  function gradeFor(score){if(score>=86)return {grade:'A',label:'Sangat baik'};if(score>=76)return {grade:'B',label:'Baik'};if(score>=66)return {grade:'C',label:'Cukup'};return {grade:'D',label:'Perlu perbaikan'}}
+  function recommendationFor(score){if(score>=86)return 'Rekomendasi: Layak diterima / dipresentasikan. Pertimbangkan penyempurnaan kecil bila diperlukan.';if(score>=76)return 'Rekomendasi: Layak dengan revisi minor. Perbaiki catatan yang diberikan sebelum finalisasi.';if(score>=66)return 'Rekomendasi: Revisi mayor. Perlu perbaikan substansial dan peninjauan ulang.';return 'Rekomendasi: Belum layak. Perlu revisi menyeluruh sebelum diajukan kembali.'}
+  function collect(){const title=$('title').value.trim();if(!title){showMessage('Judul karya wajib diisi.');$('title').focus();return null}const scores=criteria.map((_,i)=>Number(document.getElementById(`score-${i}`).value));if(scores.some(n=>!Number.isInteger(n)||n<1||n>4)){showMessage('Pilih skor 1–4 untuk setiap aspek terlebih dahulu.');return null}const aspects=criteria.map((c,i)=>({name:c.name,weight:c.weight,score:scores[i],note:document.getElementById(`note-${i}`).value.trim(),weighted:Math.round((scores[i]/4*c.weight)*100)/100}));const score=Math.round(aspects.reduce((sum,a)=>sum+a.weighted,0)*100)/100;return {id:activeAssessment?.id||`${Date.now()}-${Math.random().toString(36).slice(2,8)}`,createdAt:activeAssessment?.createdAt||new Date().toISOString(),workType:$('workType').value,title,author:$('author').value.trim(),reviewer:$('reviewer').value.trim(),institution:$('institution').value.trim(),assessmentDate:$('assessmentDate').value,overallNote:$('overallNote').value.trim(),aspects,score,...gradeFor(score)}}
+  function showResult(item){activeAssessment=item;$('result').style.display='block';$('resultScore').textContent=`${item.score} / 100`;$('resultGrade').textContent=`${item.grade} · ${item.label}`;$('resultMeta').textContent=`${item.workType}: “${item.title}” · Penulis: ${item.author||'—'} · Penilai: ${item.reviewer||'—'} · ${item.assessmentDate||''}${item.institution?' · '+item.institution:''}`;$('recommendation').textContent=recommendationFor(item.score)+(item.overallNote?` Catatan umum: ${item.overallNote}`:'');const list=document.createElement('div');const h=document.createElement('h3');h.textContent='Rincian aspek dan catatan';list.append(h);const ul=document.createElement('ul');item.aspects.forEach(a=>{const li=document.createElement('li');li.textContent=`${a.name}: ${a.score}/4 (bobot ${a.weight}%, kontribusi ${a.weighted})${a.note?' — '+a.note:''}`;ul.append(li)});list.append(ul);$('aspectResults').replaceChildren(list);$('result').scrollIntoView({behavior:'smooth',block:'start'})}
+  function updateStats(){const n=assessments.length;$('statCount').textContent=n;const avg=n?assessments.reduce((s,a)=>s+Number(a.score||0),0)/n:null;$('statAverage').textContent=avg===null?'—':avg.toFixed(1);$('statHighest').textContent=n?Math.max(...assessments.map(a=>Number(a.score||0))).toFixed(1):'—'}
+  function renderHistory(){const host=$('history');if(!assessments.length){host.innerHTML='<div class="empty">Belum ada penilaian tersimpan. Isi formulir lalu pilih “Hitung &amp; simpan penilaian”.</div>';updateStats();return}const table=document.createElement('table');table.className='history-table';const thead=document.createElement('thead');thead.innerHTML='<tr><th>Tanggal</th><th>Judul karya</th><th>Penulis</th><th>Nilai</th><th>Predikat</th><th>Aksi</th></tr>';table.append(thead);const tbody=document.createElement('tbody');assessments.slice().sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt))).forEach(item=>{const tr=document.createElement('tr');[item.assessmentDate||'—',item.title||'Tanpa judul',item.author||'—',Number(item.score).toFixed(1),`${item.grade||gradeFor(item.score).grade} · ${item.label||gradeFor(item.score).label}`].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.append(td)});const td=document.createElement('td');const actions=document.createElement('div');actions.className='history-actions';const view=document.createElement('button');view.className='btn btn-secondary btn-small';view.textContent='Lihat';view.addEventListener('click',()=>loadAssessment(item.id));const del=document.createElement('button');del.className='btn btn-danger btn-small';del.textContent='Hapus';del.addEventListener('click',()=>deleteAssessment(item.id));actions.append(view,del);td.append(actions);tr.append(td);tbody.append(tr)});table.append(tbody);host.replaceChildren(table);updateStats()}
+  function loadAssessment(id){const item=assessments.find(a=>a.id===id);if(!item)return;activeAssessment=item; $('workType').value=item.workType;$('title').value=item.title;$('author').value=item.author;$('reviewer').value=item.reviewer;$('institution').value=item.institution;$('assessmentDate').value=item.assessmentDate;$('overallNote').value=item.overallNote;item.aspects.forEach((a,i)=>{document.getElementById(`score-${i}`).value=String(a.score);document.getElementById(`note-${i}`).value=a.note||''});showResult(item)}
+  function deleteAssessment(id){assessments=assessments.filter(a=>a.id!==id);saveAssessments();renderHistory();showMessage('Penilaian dihapus.',true);if(activeAssessment?.id===id){activeAssessment=null;$('result').style.display='none'}}
+  function csvCell(value){let text=String(value??'');if(/^[=+\-@\t\r]/.test(text))text="'"+text;return '"'+text.replace(/"/g,'""')+'"'}
+  function downloadCsv(filename,rows){const content='\uFEFF'+rows.map(row=>row.map(csvCell).join(',')).join('\r\n');const blob=new Blob([content],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+  function exportAssessment(item){const rows=[['Tanggal','Jenis karya','Judul','Penulis','Penilai','Institusi','Nilai akhir','Predikat','Rekomendasi','Catatan umum'],[item.assessmentDate,item.workType,item.title,item.author,item.reviewer,item.institution,item.score,`${item.grade} - ${item.label}`,recommendationFor(item.score),item.overallNote],[],['Aspek','Bobot (%)','Skor (1-4)','Kontribusi nilai','Catatan'],...item.aspects.map(a=>[a.name,a.weight,a.score,a.weighted,a.note])];downloadCsv('penilaian-'+safeFilename(item.title)+'.csv',rows)}
+  function safeFilename(s){return String(s||'karya').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)||'karya'}
+  function clearForm(){activeAssessment=null;$('workType').value='Laporan Ilmiah';['title','author','reviewer','institution','overallNote'].forEach(id=>$(id).value='');$('assessmentDate').value=new Date().toISOString().slice(0,10);criteria.forEach((_,i)=>{document.getElementById(`score-${i}`).value='';document.getElementById(`note-${i}`).value=''});$('result').style.display='none';showMessage('Formulir baru siap diisi.',true);persistDraft()}
 
-      <section id="resultBox" class="card result-box">
-        <h2 style="margin-top: 0;">Hasil Penilaian</h2>
-        <div id="finalScore" class="score">0 / 100</div>
-        <div id="gradeText" class="grade">Predikat: -</div>
-        <div id="summaryText" class="summary"></div>
-      </section>
-
-      <div class="footer-note">Aplikasi ini dibuat untuk evaluasi cepat, gratis, dan siap dipublish ke Netlify.</div>
-    </div>
-
-    <script>
-      const criteria = [
-        {
-          name: 'Orisinalitas dan Relevansi',
-          weight: 20,
-          desc: 'Kebaruan, keaslian gagasan, dan kesesuaian topik dengan tujuan karya.'
-        },
-        {
-          name: 'Sistematika dan Struktur',
-          weight: 20,
-          desc: 'Kelengkapan bagian karya, alur penulisan, dan keteraturan penyusunan.'
-        },
-        {
-          name: 'Metode dan Ketepatan Ilmiah',
-          weight: 25,
-          desc: 'Kesesuaian metode, kejelasan prosedur, dan ketepatan penggunaan konsep.'
-        },
-        {
-          name: 'Data, Analisis, dan Pembahasan',
-          weight: 20,
-          desc: 'Kualitas data, kecermatan analisis, dan hubungan hasil dengan tujuan.'
-        },
-        {
-          name: 'Bahasa dan Referensi',
-          weight: 15,
-          desc: 'Kejelasan bahasa, konsistensi gaya, dan kualitas sitasi serta pustaka.'
-        }
-      ];
-
-      const rubric = document.getElementById('rubric');
-
-      function renderRubric() {
-        rubric.innerHTML = criteria.map((item, index) => `
-          <div class="criterion">
-            <div>
-              <div class="criterion-title">${item.name}</div>
-              <div class="criterion-desc">${item.desc}</div>
-              <span class="weight">Bobot: ${item.weight}%</span>
-            </div>
-            <div>
-              <label for="score-${index}">Skor (1–4)</label>
-              <select id="score-${index}" class="score-input">
-                <option value="">Pilih skor</option>
-                <option value="1">1 - Kurang</option>
-                <option value="2">2 - Cukup</option>
-                <option value="3">3 - Baik</option>
-                <option value="4">4 - Sangat Baik</option>
-              </select>
-            </div>
-            <div>
-              <label for="note-${index}">Catatan</label>
-              <textarea id="note-${index}" placeholder="Tuliskan catatan penilai"></textarea>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      function getGrade(score) {
-        if (score >= 86) return ['A', 'Sangat Baik'];
-        if (score >= 76) return ['B', 'Baik'];
-        if (score >= 66) return ['C', 'Cukup'];
-        return ['D', 'Perlu Perbaikan'];
-      }
-
-      function collectAssessment() {
-        const scores = [...document.querySelectorAll('.score-input')];
-        const notes = [...document.querySelectorAll('textarea[id^="note-"]')];
-        const rows = criteria.map((item, index) => ({
-          aspek: item.name,
-          bobot: item.weight,
-          skor: Number(scores[index].value),
-          catatan: notes[index].value.trim()
-        }));
-
-        return rows;
-      }
-
-      document.getElementById('calculate').addEventListener('click', () => {
-        const errorBox = document.getElementById('error');
-        const resultBox = document.getElementById('resultBox');
-        errorBox.textContent = '';
-
-        const scoreInputs = [...document.querySelectorAll('.score-input')];
-        if (scoreInputs.some((input) => input.value === '')) {
-          errorBox.textContent = 'Harap pilih skor untuk semua aspek sebelum menghitung.';
-          return;
-        }
-
-        let total = 0;
-        scoreInputs.forEach((input, idx) => {
-          total += (Number(input.value) / 4) * criteria[idx].weight;
-        });
-
-        const rounded = Math.round(total * 100) / 100;
-        const [letter, desc] = getGrade(rounded);
-        const type = document.getElementById('workType').value === 'kti' ? 'Karya Tulis Ilmiah (KTI)' : 'Laporan Ilmiah';
-        const title = document.getElementById('title').value || 'Tanpa judul';
-        const author = document.getElementById('author').value || 'Nama penulis belum diisi';
-        const reviewer = document.getElementById('reviewer').value || 'Nama penilai belum diisi';
-
-        document.getElementById('finalScore').textContent = `${rounded} / 100`;
-        document.getElementById('gradeText').textContent = `Predikat: ${letter} - ${desc}`;
-        document.getElementById('summaryText').textContent = `${type} "${title}" oleh ${author}. Penilai: ${reviewer}.`;
-        resultBox.style.display = 'block';
-      });
-
-      document.getElementById('exportCsv').addEventListener('click', () => {
-        const rows = collectAssessment();
-        const errors = rows.filter((row) => row.skor === 0 || Number.isNaN(row.skor));
-        if (errors.length > 0) {
-          document.getElementById('error').textContent = 'Harap pilih skor terlebih dahulu sebelum mengekspor CSV.';
-          return;
-        }
-
-        const csvRows = [
-          ['Aspek', 'Bobot (%)', 'Skor', 'Catatan'],
-          ...rows.map((row) => [row.aspek, row.bobot, row.skor, row.catatan])
-        ];
-
-        const csv = csvRows.map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(',')).join('\n');
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'hasil-penilaian-kti.csv';
-        link.click();
-        URL.revokeObjectURL(url);
-      });
-
-      document.getElementById('print').addEventListener('click', () => window.print());
-
-      document.getElementById('reset').addEventListener('click', () => {
-        document.getElementById('workType').value = 'laporan';
-        document.getElementById('title').value = '';
-        document.getElementById('author').value = '';
-        document.getElementById('reviewer').value = '';
-        document.querySelectorAll('.score-input').forEach((el) => (el.value = ''));
-        document.querySelectorAll('textarea[id^="note-"]').forEach((el) => (el.value = ''));
-        document.getElementById('resultBox').style.display = 'none';
-        document.getElementById('error').textContent = '';
-      });
-
-      renderRubric();
-    </script>
-  </body>
+  renderRubric();$('assessmentDate').value=new Date().toISOString().slice(0,10);restoreDraft();renderHistory();
+  document.addEventListener('input',e=>{if(e.target.matches('input,select,textarea'))persistDraft()});
+  $('saveAssessment').addEventListener('click',()=>{const item=collect();if(!item)return;const index=assessments.findIndex(a=>a.id===item.id);if(index>=0)assessments[index]=item;else assessments.push(item);if(!saveAssessments()){showMessage('Tidak dapat menyimpan. Ruang penyimpanan browser mungkin penuh; ekspor data CSV.');return}try{localStorage.removeItem(DRAFT_KEY)}catch{}showResult(item);renderHistory();showMessage('Penilaian berhasil disimpan di browser ini.',true)});
+  $('exportCurrent').addEventListener('click',()=>{const item=collect();if(!item)return;exportAssessment(item);showMessage('File CSV penilaian berhasil diekspor.',true)});
+  $('exportHistory').addEventListener('click',()=>{if(!assessments.length){showMessage('Belum ada riwayat untuk diekspor.');return}const rows=[['Tanggal','Jenis karya','Judul','Penulis','Penilai','Institusi','Nilai akhir','Predikat','Catatan umum']];assessments.forEach(a=>rows.push([a.assessmentDate,a.workType,a.title,a.author,a.reviewer,a.institution,a.score,`${a.grade} - ${a.label}`,a.overallNote]));downloadCsv('rekap-penilaian.csv',rows);showMessage('Rekap CSV berhasil diekspor.',true)});
+  $('printReport').addEventListener('click',()=>{if(!$('result').style.display||$('result').style.display==='none'){const item=collect();if(!item)return;showResult(item)}document.querySelector('.print-header').classList.remove('hidden');window.print();setTimeout(()=>document.querySelector('.print-header').classList.add('hidden'),500)});
+  $('newAssessment').addEventListener('click',()=>{if(confirm('Mulai penilaian baru? Draft saat ini akan dikosongkan.'))clearForm()});
+  $('clearHistory').addEventListener('click',()=>{if(!assessments.length)return;if(confirm('Hapus seluruh riwayat penilaian dari browser ini? Tindakan ini tidak dapat dibatalkan.')){assessments=[];saveAssessments();renderHistory();showMessage('Semua riwayat telah dihapus.',true)}});
+})();
+</script>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
