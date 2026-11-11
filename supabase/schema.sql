@@ -22,6 +22,12 @@ create index if not exists assessments_user_created_idx
 
 alter table public.assessments enable row level security;
 
+-- Drop policies first so this setup script can safely be run again.
+drop policy if exists "Users can read own assessments" on public.assessments;
+drop policy if exists "Users can create own assessments" on public.assessments;
+drop policy if exists "Users can update own assessments" on public.assessments;
+drop policy if exists "Users can delete own assessments" on public.assessments;
+
 create policy "Users can read own assessments"
   on public.assessments for select to authenticated
   using ((select auth.uid()) = user_id);
